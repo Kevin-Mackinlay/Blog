@@ -1,0 +1,42 @@
+# Exclude system files and directories
+Configuración local/
+Cookies/
+Datos de programa/
+Entorno de red/
+Impresoras/
+Menú Inicio/
+Mis documentos/
+Plantillas/
+Reciente/
+SendTo/
+AppData/
+Contacts/
+Documents/
+Downloads/
+Favorites/
+IntelGraphicsProfiles/
+Links/
+Music/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+.bash_history
+.config/
+.dbus-keyrings/
+.docker/
+.git-for-windows-updater
+.gitconfig
+.lesshst
+.node_repl_history
+.sonarlint/
+.ssh/
+.th-client/
+.vscode/
+.yarnrc
+NTUSER.DAT*
+OneDrive/
+npm-cache/
+desktop.ini
+*.lnk
+~$*
