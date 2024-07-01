@@ -40,3 +40,5 @@ npm-cache/
 desktop.ini
 *.lnk
 ~$*
+# node modules
+node_modules/

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom';
 
-import Register from './pages/register.jsx';
+import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import Write from './pages/Write.jsx';
 import Home from './pages/Home.jsx';
