@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Edit from '../img/editar.png';
 import Delete from '../img/borrar.png';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
@@ -15,53 +15,58 @@ const Single = () => {
 
   const postId = location.pathname.split('/')[2];
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, token } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts/${postId}`);
+        const res = await axios.get(`/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPost(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [postId]);
+  }, [postId, token]);
 
   const handleDelete = async () => {
-
- try {
-        await axios.delete(`/posts/${postId}`);
-      Navigate('/');
-      } catch (err) {
-        console.log(err);
-      }
-  }
-
+    try {
+      await axios.delete(`/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="single">
       <div className="content">
-        <img src={post?.img} />
+        <img src={post?.img} alt="Post" />
         <div className="user">
-          {post.userImg  && <img src={post.userImg} alt="" />}
+          {post.userImg && <img src={post.userImg} alt="User" />}
           <div className="info">
             <span>{post.username}</span>
-            <p>Posted {moment(post.date).fromNow} </p>
+            <p>Posted {moment(post.date).fromNow()} </p>
           </div>
           {currentUser.username === post.username && (
             <div className="edit">
-              <Link to={`/write?edit=2`}>
-                <img src={Edit} alt="" />
+              <Link to={`/write?edit=2`} state={post}>
+                <img src={Edit} alt="Edit" />
               </Link>
-              <img onClick={handleDelete} src={Delete} alt="" />
+              <img onClick={handleDelete} src={Delete} alt="Delete" />
             </div>
           )}
         </div>
         <h1>{post.title}</h1>
-
-        {post.desc}
+        <p>{post.desc}</p>
       </div>
       <Menu />
     </div>
