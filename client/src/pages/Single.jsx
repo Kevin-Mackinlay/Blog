@@ -46,6 +46,10 @@ const Single = () => {
     }
   };
 
+  // Add console logs to debug
+  console.log('currentUser:', currentUser);
+  console.log('post:', post);
+
   return (
     <div className="single">
       <div className="content">
@@ -56,7 +60,7 @@ const Single = () => {
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()} </p>
           </div>
-          {currentUser.username === post.username && (
+          { currentUser.username === post.username && (
             <div className="edit">
               <Link to={`/write?edit=2`} state={post}>
                 <img src={Edit} alt="Edit" />
@@ -68,7 +72,7 @@ const Single = () => {
         <h1>{post.title}</h1>
         <p>{post.desc}</p>
       </div>
-      <Menu />
+      <Menu cat={post.cat}/>
     </div>
   );
 };
