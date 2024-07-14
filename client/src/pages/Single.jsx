@@ -65,12 +65,12 @@ const Single = () => {
           )}
         </div>
         <h1>{post.title}</h1>
-        {getText(post.desc)} 
+       
         <p
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.desc),
           }}
-        ></p>{' '}
+        ></p>
       </div>
       <Menu cat={post.cat} />
     </div>

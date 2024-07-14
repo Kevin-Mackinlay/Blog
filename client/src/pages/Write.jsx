@@ -46,7 +46,9 @@ const Write = () => {
           });
       navigate('/');
     } catch (err) {
-      console.log(err);
+       console.log('Error Details:', err.response ? err.response.data : err.message);
+       console.log('Error Status:', err.response ? err.response.status : 'No response status');
+       console.log('Error Headers:', err.response ? err.response.headers : 'No response headers');
     }
   };
 

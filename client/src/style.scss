@@ -76,6 +76,7 @@ $darkBlue: #003366;
     .navbar {
       width: 100%;
       background-color: rgb(179, 179, 219);
+       font-family: 'Poppins', sans-serif; 
       .container {
         padding: 10px 0px;
         display: flex;
@@ -95,7 +96,7 @@ $darkBlue: #003366;
           h6 {
             font-size: 16px;
             font-weight: 500;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+           
           }
 
           .spanOne {
@@ -111,7 +112,7 @@ $darkBlue: #003366;
 
           span {
             cursor: pointer;
-            background-color: rgb(195, 137, 137);
+          background-color: rgb(195, 137, 137);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -121,9 +122,10 @@ $darkBlue: #003366;
             &:hover {
               width: 48px;
               height: 50px;
-              color: rgb(94, 126, 136);
-              background-color: white;
+               color: #ffffff;
+               background-color: #5c6bc0; 
               border: 1px solid $lightBlue;
+             
             }
           }
 
@@ -140,9 +142,9 @@ $darkBlue: #003366;
             &:hover {
               width: 48px;
               height: 48px;
-              color: rgb(94, 126, 136);
-              background-color: white;
-              border: 1px solid $lightBlue;
+               color: #ffffff;
+              background-color: #1e88e5; 
+          border: 1px solid #1565c0; 
             }
           }
         }

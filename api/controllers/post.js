@@ -32,7 +32,10 @@ export const addPost = (req, res) => {
     const values = [req.body.title, req.body.desc, req.body.img, req.body.cat, req.body.date, userInfo.id];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) {
+        console.error('Database Insert Error:', err);
+        return res.status(500).json({ message: 'Internal Server Error', error: err });
+      }
 
       return res.json('Post has been created!');
     });
