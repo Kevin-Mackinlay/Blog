@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/authContext';
+import moment from 'moment';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-
-const cat = useLocation().search
+  const { currentUser } = useContext(AuthContext);
+  const cat = useLocation().search;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,48 +21,11 @@ const cat = useLocation().search
     fetchData();
   }, [cat]);
 
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     title: 'Exploring the Mountains',
-  //     desc: 'A thrilling adventure through the Rocky Mountains. Hike the trails, experience the breathtaking views, and immerse yourself in nature.',
-  //     img: 'https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Gourmet Food Tour',
-  //     desc: 'Join us on a culinary journey through the finest restaurants and hidden gems of the city. Taste exquisite dishes and learn about the art of gourmet cooking.',
-  //     img: 'https://images.pexels.com/photos/5710204/pexels-photo-5710204.jpeg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Urban Design Secrets',
-  //     desc: "Discover the secrets of urban design and architecture. Explore the city's landmarks and learn about the principles that shape our urban spaces.",
-  //     img: 'https://images.pexels.com/photos/315191/pexels-photo-315191.jpeg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Desert Safari Adventure',
-  //     desc: 'Experience the thrill of a desert safari. Ride the dunes, witness the stunning sunset, and enjoy a traditional Bedouin dinner under the stars.',
-  //     img: 'https://images.pexels.com/photos/53537/caravan-desert-safari-dune-53537.jpeg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  //   {
-  //     id: 5,
-  //     title: 'Tropical Paradise Getaway',
-  //     desc: "Escape to a tropical paradise. Relax on pristine beaches, swim in crystal-clear waters, and indulge in the island's vibrant culture and cuisine.",
-  //     img: 'https://images.pexels.com/photos/20845211/pexels-photo-20845211/free-photo-of-mar-oceano-costa-orilla-del-mar.jpeg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  //   {
-  //     id: 6,
-  //     title: 'Creative Design Workshop',
-  //     desc: 'Unleash your creativity in our design workshop. Learn new techniques, get inspired by expert designers, and create your own unique projects.',
-  //     img: 'https://images.pexels.com/photos/3811074/pexels-photo-3811074.jpeg?auto=compress&cs=tinysrgb&w=400',
-  //   },
-  // ];
-const getText = (html) => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent;
-}
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent;
+  };
+
   return (
     <div className="home">
       <div className="posts">
@@ -74,9 +39,18 @@ const getText = (html) => {
                 <h1>{post.title}</h1>
               </Link>
               <p>{getText(post.desc)}</p>
-              <Link  to={`/post/${post.id}`}>
-              <button>Read More</button>
+              <Link to={`/post/${post.id}`}>
+                <button>Read More</button>
               </Link>
+              {currentUser && post.userImg && (
+                <div className="user">
+                  <img src={post.userImg} alt={post.username} />
+                  <div className="info">
+                    <span>{post.username}</span>
+                    <p>Posted {moment(post.date).fromNow()}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ))}
